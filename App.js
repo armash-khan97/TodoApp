@@ -4,39 +4,45 @@ import { StyleSheet, View, TextInput, Button, Text } from 'react-native';
 
 const App = () => {
 
+  const [enteredGoal, setEnteredGoal] = useState('');
+  const [coursGoals, setCoursGoal] = useState([])
+
+  const goalEnterHandle = (enteredText) => {
+    setEnteredGoal(enteredText)
+  };
+  const addGoalHandle = () => {
+setCoursGoal(currentGoals =>[...currentGoals,enteredGoal])
+  }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.con}>
-        <TextInput style={styles.input}
+    <View style={styles.screen}>
+      <View style={styles.inputContainer}>
+        <TextInput style={styles.input} placeholder='Enter your Task' onChangeText={goalEnterHandle}
+          value={enteredGoal}
         />
-        <Button title='Add' style={styles.btn} />
+        <Button title='Add' onPress={addGoalHandle} />
       </View>
+<View>
+  {coursGoals.map((goal)=><Text key={goal}>{goal}</Text>)}
+</View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-
-    backgroundColor: "#fff",
+  screen: {
+    padding: 50
   },
-  con: {
-    flexDirection: "row",
-    alignItems: 'center',
-    justifyContent: 'center',
+  inputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: "center"
   },
   input: {
     width: "80%",
+    borderColor: '#000',
     borderWidth: 1,
-    borderRadius: 10,
-    margin: 10,
-    marginVertical:29
-  },
-  btn: {
-    // borderRadius:10,
+    padding: 10
 
   }
 });
